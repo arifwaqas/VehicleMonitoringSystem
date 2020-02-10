@@ -72,8 +72,9 @@ Detection Image Before crossing the line</img>
 <img src="https://i.imgur.com/JktxvsB.png"> Cropped and Filtered photo of the License Plate .
 <h1 id="App">Vehicle Detection App<h1>
 
- - <img src="https://i.imgur.com/h9ytWbJ.jpg">Starting of the app</img>
- - <img src="https://i.imgur.com/Xd94ZMZ.jpg">Database of the Admin</img>
+ - Starting of the app ("https://i.imgur.com/h9ytWbJ.jpg")
+ - Database of the Admin ("https://i.imgur.com/Xd94ZMZ.jpg")
+ - [NOT REQUIRED] You are requested to install the app on your android device from playstore (Vehicle Detection)
 
 
 <h1 id="working">How It Works</h1>
