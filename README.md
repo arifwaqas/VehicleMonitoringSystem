@@ -1,111 +1,74 @@
-# TrainYourOwnYOLO: Building a Custom Object Detector from Scratch [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
-This repo let's you train a custom image detector using the state-of-the-art [YOLOv3](https://pjreddie.com/darknet/yolo/) computer vision algorithm. For a short write up check out this [medium post](https://medium.com/@muehle/how-to-train-your-own-yolov3-detector-from-scratch-224d10e55de2). 
+# ADVANCED VEHICLE MONITORING
+<h4>Using YOLOv3 and Pytesseract (Team: Error_404)</h4>
 
-### Pipeline Overview
+**Problem Statement :** Create an affordable Solution through image processing of the number plates of vehicles for the **Detection , Identification and Monitoring** of Vehicles in Different scenario.
 
-To build and test your object detection algorithm follow the below steps:
+# Table of Contents
 
- 1. [Image Annotation](/1_Image_Annotation/)
-	 - Install Microsoft's Visual Object Tagging Tool (VoTT)
-	 - Annotate images
- 2. [Training](/2_Training/)
- 	- Download pre-trained weights
- 	- Train your custom YOLO model on annotated images 
- 3. [Inference](/3_Inference/)
- 	- Detect objects in new images and videos
-
-## Repo structure
-+ [`1_Image_Annotation`](/1_Image_Annotation/): Scripts and instructions on annotating images
-+ [`2_Training`](/2_Training/): Scripts and instructions on training your YOLOv3 model
-+ [`3_Inference`](/3_Inference/): Scripts and instructions on testing your trained YOLO model on new images and videos
-+ [`Data`](/Data/): Input Data, Output Data, Model Weights and Results
-+ [`Utils`](/Utils/): Utility scripts used by main scripts
-
-## Getting Started
-
-### Requisites
-The only hard requirement is a running version of python 3.3 or newer. To install the latest python 3.x version go to 
-- [python.org/downloads](https://www.python.org/downloads/) 
-
-and follow the installation instructions. 
-
-To speed up training, it is recommended to use a **GPU with CUDA** support. For example on [AWS](/2_Training/AWS/) you can use a `p2.xlarge` instance (Tesla K80 GPU with 12GB memory). Inference is very fast even on a CPU with approximately ~2 images per second. 
-
-
-### Installation
-
-#### 1a Setting up Virtual Environment [Linux or Mac]
-
-Clone this repo with:
-```
-git clone https://github.com/AntonMu/TrainYourOwnYOLO
-cd TrainYourOwnYOLO/
-```
-Create Virtual **(Linux/Mac)** Environment (requires [venv](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) which is included in the standard library of Python 3.3 or newer):
-```
-python3 -m venv env
-source env/bin/activate
-```
-Make sure that, from now on, you **run all commands from within your virtual environment**.
-
-#### 1b Setting up Virtual Environment [Windows]
-Use the [Github Desktop GUI](https://desktop.github.com/) to clone this repo to your local machine. Navigate to the `TrainYourOwnYOLO` project folder and open a power shell window by pressing **Shift + Right Click** and selecting `Open PowerShell window here` in the drop-down menu.
-
-Create Virtual **(Windows)** Environment (requires [venv](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) which is included in the standard library of Python 3.3 or newer):
-
-```
-py -m venv env
-.\env\Scripts\activate
-```
-![PowerShell](/Utils/Screenshots/PowerShell.png)
-Make sure that, from now on, you **run all commands from within your virtual environment**.
-
-#### 2 Install Required Packages [Windows, Mac or Linux]
-If you are running TrainYourOwnYOLO on a machine with **GPU with CUDA** drivers installed run:
-
-```
-pip3 install -r requirements_gpu.txt
-```
-Otherwise, run:
-```
-pip3 install -r requirements_cpu.txt
-```
-
-## Quick Start (Inference only)
-To test the cat face detector on test images located in [`TrainYourOwnYOLO/Data/Source_Images/Test_Images`](/Data/Source_Images/Test_Images) run the `Minimal_Example.py` script in the root folder with:
-
-```
-python Minimal_Example.py
-```
-
-The outputs are saved in [`TrainYourOwnYOLO/Data/Source_Images/Test_Image_Detection_Results`](/Data/Source_Images/Test_Image_Detection_Results). This includes:
- - Cat pictures with bounding boxes around faces with confidence scores and
- - [`Detection_Results.csv`](/Data/Source_Images/Test_Image_Detection_Results/Detection_Results.csv) file with file names and locations of bounding boxes.
-
- If you want to detect cat faces in your own pictures, replace the cat images in [`Data/Source_Images/Test_Images`](/Data/Source_Images/Test_Images) with your own images.
-
-## Full Start (Training and Inference)
-
-To train your own custom YOLO object detector please follow the instructions detailed in the three numbered subfolders of this repo:
-- [`1_Image_Annotation`](/1_Image_Annotation/),
-- [`2_Training`](/2_Training/) and
-- [`3_Inference`](/3_Inference/).
+ - <a href="#Prerequisites">Prerequisites</a>
+				 - Detection
+				 - OCR
+				 - Storage
+ - <a href="#steps">How to run</a>
  
-**To make everything run smoothly it is highly recommended to keep the original folder structure of this repo!**
+ - <a href = "#Samples"> Samples From the Code</a>
+ - <a href="#App">Vehicle Detection App</a>
+ - <a href="#working">How it Works</a>
 
-Each `*.py` script has various command line options that help tweak performance and change things such as input and output directories. All scripts are initialized with good default values that help accomplish all tasks as long as the original folder structure is preserved. To learn more about available command line options of a python script `<script_name.py>` run:
+ 
+ ## <h1 id = "Prerequisites">PREREQUISITES</h1>
+<H4><U>DETECTION</U></H4>
+                        
+ - Run Requirements File for Installing the Required Packages :
+		 **If you want to run on CPU:**
+					`pip install -r requirements-cpu.txt`
+		**If you want to run on GPU:**
+					`pip install -r requirements-gpu.txt`
+<h4><u>OCR<u></h4>
+ - Install Pytesseract using following steps:
+			 
+ - Download Pytesseract using the Below link:
+			 - [Tesseract-ocr-Download](https://sourceforge.net/projects/tesseract-ocr-alt/files/)
+			-Add **C:/Program Files/Tesseract-OCR/tesseract.exe'** to your  system variables
+			- Then Install tesseract on our system by using:
+						`pip install pytesseract-ocr`
+<h4><u>STORAGE<u></h4>
+		
+ - We are using FireBase for our Storage system
+ - It can be installed by following command:
+		 - `pip install pyrebase`
 
-```
-python <script_name.py> -h
-```
 
-## License
+<h1 id="steps">How to Run</h1>
+		
 
-Unless explicitly stated otherwise at the top of a file, all code is licensed under the MIT license. This repo makes use of [**ilmonteux/logohunter**](https://github.com/ilmonteux/logohunter) which itself is inspired by [**qqwweee/keras-yolo3**](https://github.com/qqwweee/keras-yolo3).
+ - Download the Model weights **trained_weights_final.h5** and **yolo.h5** from here:
+		 [trained_weights_final.h5]() and [yolo.h5](www.youtube.in) and put them in **Data/Model Weights/**
+ - **<u>Step 0:</u>** Change the locations of the file in the code wherever required.
+ - **<u>Step 1:</u>** Images and Video to Detect should be kept in **Data/Source Images/Test Images/**
+ - **<u>Step 2:</u>** If you want to Detect the Files just go to **Inference/Detector.py**
+ - **<u>Step 3:</u>** If you have put **Video on Detection** , It would be open for first **15 seconds to click on the two points in frame**...for creating a line, then it will detected itself
 
-## Acknowledgements
-Many thanks to [Niklas Wilson](https://github.com/NiklasWilson) for contributing towards making this repo compatible with Tensorflow 2.0. 
+<h1 id="Samples">Samples From the Code</h1>
+<img src="https://drive.google.com/open?id=1yUM85Lpyn9JVsGi6dOA2vGyhUL6X7MY7" height=100>
+Detection Image Before crossing the line</img>
+<hr color='red' >
+<img src="https://drive.google.com/open?id=1rgY1PmjpKaevyKTJkduUPPTTYpdbjPqp">Detection image after crossing the line which turns into Green
+<hr color='red'>
+<img src="https://drive.google.com/open?id=1Dt4E9KqQs2B85Zfm1cSNqImKTOZIOQi-">Top Left Corner window showing the Detected Number plate of the Vehicle</img>
+<hr color='red'>
+<img src="https://drive.google.com/open?id=1lxBveDYXd2R5FBp6PNnLfj3KEwt2YOeT"> Cropped and Filtered photo of the License Plate .
+<h1 id="App">Vehicle Detection App<h1>
+
+ - <img src="https://drive.google.com/open?id=1EhVa1mEoQ-PHaOKqhIx5yozLW_WKZsNd">Starting of the app</img>
+ - <img src='
+https://drive.google.com/open?id=1D7Uc4kz2kchMHfkWZJxj1XqwZnbuim9o'>Database of the Admin</img>
+
+
+<h1 id="working">How It Works</h1>
+
+ - When we run the model , Number plate will be detected with an average **accuracy of 97%** of the vehicles crossing the Line drawn , Then the Number Plate will be cropped and filtered and passed through The OCR and we will get the Number plate. Then the Numbe Plate we get , then Processed through the RTO Database and If the Data is Found , Then it will be updated in the Storage as well as App too. But If No data is Found in the RTO database , then it will cause an Alert in the Admin Database in the app , and can only be resolved by Manually entering the Number plate in the App .
 
 ## Troubleshooting
 
@@ -137,4 +100,3 @@ Many thanks to [Niklas Wilson](https://github.com/NiklasWilson) for contributing
 - ⭐ **star** this repo to get notifications on future improvements and
 - 🍴 **fork** this repo if you like to use it as part of your own project.
 
-![CatVideo](/Utils/Screenshots/CatVideo.gif)
