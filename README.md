@@ -45,7 +45,7 @@
 			-Add **C:/Program Files/Tesseract-OCR/tesseract.exe'** to your  system variables
 			- Then Install tesseract on our system by using:
  	
-                             `pip install pytesseract-ocr`
+                 `pip install pytesseract-ocr`
   - For Hindi OCR , Download [hin.trainedata](	https://github.com/tesseract-ocr/tessdata/blob/master/hin.traineddata) and put it `C:\Program Files\Tesseract-OCR\tessdata`
 <h4><u>STORAGE<u></h4>
 		
