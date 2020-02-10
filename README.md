@@ -7,7 +7,7 @@
 - Improved system for handling unrecognized number plate by sending a push notification to the concerned personnel with the image and the text fields for manually entering the plate number by looking at the picture, before the data is retreived from the RTO.
 - Implemented DeepSORT to keep track of vehicles "coming in" or "goin out"
 - Implemented SafeSPEED parameter to keep track of the vehicle's speed while at the entry point
-- Speed Detector depends varies camera to camera.It can be implemented by changing the variables.
+- Speed Detector dependencies varies from camera to camera.It can be implemented by changing the variables.
 - Improved best Confidence Score refining mechanism 
 - Improved filter for image processing and deskewing algorithms used
 
