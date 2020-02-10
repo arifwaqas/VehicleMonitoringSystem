@@ -1,6 +1,17 @@
+### Update v1.11
+- Added support for Hindi OCR 
+
+### Update v1.1
+- Improved retrained model with a vast dataset of 5000+ 
+- FR secured was 0.97 on 100 samples (previously 0.96)
+- Improved system for handling unrecognized number plate by sending a push notification to the concerned personnel with the image and the text fields for manually entering the plate number by looking at the picture, before the data is retreived from the RTO.
+- Implemented DeepSORT to keep track of vehicles "coming in" or "goin out"
+- Implemented SafeSPEED parameter to keep track of the vehicle's speed while at the entry point
+- Improved best Confidence Score refining mechanism 
+- Improved filter for image processing and deskewing algorithms used
 
 # ADVANCED VEHICLE MONITORING
-<h4>Using YOLOv3 and Pytesseract (Team: Error_404)</h4>
+<h4>Using YOLOv3 and Pytesseract (Team: Error_404) (College: NIT Jalandhar)</h4>
 
 **Problem Statement :** Create an affordable Solution through image processing of the number plates of vehicles for the **Detection , Identification and Monitoring** of Vehicles in Different scenario.
 
@@ -44,26 +55,25 @@
 		
 
  - Download the Model weights **trained_weights_final.h5** and **yolo.h5** from here:
-		 [trained_weights_final.h5]() and [yolo.h5](www.youtube.in) and put them in **Data/Model Weights/**
+		 [trained_weights_final.h5](https://mega.nz/#!Q2QC0SyC!IqcNH6iVcLgr5NK2W1cH5iXl5Dm4H3jlrPM3x5hI1yI) and [yolo.h5](https://mega.nz/#!83RgCCCQ!I3gQAqU80R75YzhkfO2Vne4OU1A4fi8SCNvWaL3qQfQ) and put them in **Data/Model Weights/**
  - **<u>Step 0:</u>** Change the locations of the file in the code wherever required.
  - **<u>Step 1:</u>** Images and Video to Detect should be kept in **Data/Source Images/Test Images/**
  - **<u>Step 2:</u>** If you want to Detect the Files just go to **Inference/Detector.py**
  - **<u>Step 3:</u>** If you have put **Video on Detection** , It would be open for first **15 seconds to click on the two points in frame**...for creating a line, then it will detected itself
 
 <h1 id="Samples">Samples From the Code</h1>
-<img src="https://drive.google.com/open?id=1yUM85Lpyn9JVsGi6dOA2vGyhUL6X7MY7" height=100>
+<img src="https://i.imgur.com/fNeMqZ4.png" height=100>
 Detection Image Before crossing the line</img>
 <hr color='red' >
-<img src="https://drive.google.com/open?id=1rgY1PmjpKaevyKTJkduUPPTTYpdbjPqp">Detection image after crossing the line which turns into Green
+<img src="https://i.imgur.com/dZcvPoe.png">Detection image after crossing the line which turns into Green
 <hr color='red'>
-<img src="https://drive.google.com/open?id=1Dt4E9KqQs2B85Zfm1cSNqImKTOZIOQi-">Top Left Corner window showing the Detected Number plate of the Vehicle</img>
+<img src="https://i.imgur.com/XYDqFjv.png">Top Left Corner window showing the Detected Number plate of the Vehicle</img>
 <hr color='red'>
-<img src="https://drive.google.com/open?id=1lxBveDYXd2R5FBp6PNnLfj3KEwt2YOeT"> Cropped and Filtered photo of the License Plate .
+<img src="https://i.imgur.com/JktxvsB.png"> Cropped and Filtered photo of the License Plate .
 <h1 id="App">Vehicle Detection App<h1>
 
- - <img src="https://drive.google.com/open?id=1EhVa1mEoQ-PHaOKqhIx5yozLW_WKZsNd">Starting of the app</img>
- - <img src='
-https://drive.google.com/open?id=1D7Uc4kz2kchMHfkWZJxj1XqwZnbuim9o'>Database of the Admin</img>
+ - <img src="https://i.imgur.com/h9ytWbJ.jpg">Starting of the app</img>
+ - <img src="https://i.imgur.com/Xd94ZMZ.jpg">Database of the Admin</img>
 
 
 <h1 id="working">How It Works</h1>
@@ -97,6 +107,6 @@ https://drive.google.com/open?id=1D7Uc4kz2kchMHfkWZJxj1XqwZnbuim9o'>Database of 
 
 ## Stay Up-to-Date
 
-- ⭐ **star** this repo to get notifications on future improvements and
-- 🍴 **fork** this repo if you like to use it as part of your own project.
+- **star** this repo to get notifications on future improvements and
+- **fork** this repo if you like to use it as part of your own project.
 
