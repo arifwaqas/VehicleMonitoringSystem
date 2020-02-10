@@ -16,6 +16,10 @@
 
 **Problem Statement :** Create an affordable Solution through image processing of the number plates of vehicles for the **Detection , Identification and Monitoring** of Vehicles in Different scenario.
 
+### Sample Annotation
+Please find the annotations using this model on the below link 
+https://www.youtube.com/watch?v=A1jiDW4kLoo
+
 # Table of Contents
 
  - <a href="#Prerequisites">Prerequisites</a>
