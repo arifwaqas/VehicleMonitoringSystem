@@ -77,7 +77,7 @@ Detection Image Before crossing the line</img>
 
  - Starting of the app ("https://i.imgur.com/h9ytWbJ.jpg")
  - Database of the Admin ("https://i.imgur.com/Xd94ZMZ.jpg")
- - [NOT REQUIRED] You are requested to install the app on your android device from playstore (Vehicle Detection)
+ - [NOT REQUIRED] You are requested to install the app on your android device from http://github.com/praveen4030/VechileDetection FOR FULL FUNCTIONALITY
 
 
 <h1 id="working">How It Works</h1>
