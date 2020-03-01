@@ -37,13 +37,13 @@ def detect_object(yolo, img_path, save_img, save_img_path="./", postfix=""):
         print("File Open Error! Try again!")
         return None, None
 
-    prediction, new_image = yolo.detect_image(image)
+    prediction,car_plate, new_image = yolo.detect_image(image)
 
     img_out = postfix.join(os.path.splitext(os.path.basename(img_path)))
     if save_img:
         new_image.save(os.path.join(save_img_path, img_out))
 
-    return prediction, image_array
+    return prediction,car_plate, image_array
 
 
 def parse_input():
