@@ -30,9 +30,9 @@ from Get_File_Paths import GetFileList
 import random
 import json
 import requests
-import pyrebase
+# import pyrebase
 import datetime
-config = {
+'''config = {
   "apiKey": "AIzaSyDaYILIFsZWzCl54rbQQMrGT5ET3o8Yj6U",
   "authDomain": "vechiledetection",
   "databaseURL": "https://vechiledetection.firebaseio.com/",
@@ -86,7 +86,7 @@ def RTO(country,plate_no,text):
             "vclass": str(vehicleClass)
              }
     
-    db.child("Entry").child(DTKey).child(vehicleTime).set(data)
+    db.child("Entry").child(DTKey).child(vehicleTime).set(data)'''
     
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
@@ -273,7 +273,7 @@ if __name__ == "__main__":
         # This is for images
         for i, img_path in enumerate(input_image_paths):
             print(img_path)
-            prediction, image = detect_object(
+            prediction,car_plate_prediction, image = detect_object(
                 yolo,
                 img_path,
                 save_img=save_img,
@@ -281,7 +281,7 @@ if __name__ == "__main__":
                 postfix=FLAGS.postfix,
             )
             y_size, x_size, _ = np.array(image).shape
-            for single_prediction in prediction:
+            for single_prediction in car_plate_prediction:
                 out_df = out_df.append(
                     pd.DataFrame(
                         [
@@ -343,18 +343,18 @@ if __name__ == "__main__":
             cv2.imshow("im_dil",img_dilate)
             config = ('-l eng --oem 1 --psm 3')
             resultsPlate = pytesseract.image_to_string(img_dilate,config=config)
-            #print(text)
+            print(resultsPlate)
             pathSavedLP = os.path.join(detection_results_folder,'savedLP.png')
             cv2.imwrite( pathSavedLP, img_dilate)
             country_code = resultsPlate[:len(resultsPlate)-4]
             plate_number = resultsPlate[len(resultsPlate)-4:]
      
-            login_data={"r1[]":"PB22G",
+            '''login_data={"r1[]":"PB22G",
                 "r2":"4565",
                 "auth":"Y29tLmRlbHVzaW9uYWwudmVoaWNsZWluZm8="}
      
-            RTO(country_code,plate_number,resultsPlate)
-            cv2.waitkey(2000)
+            RTO(country_code,plate_number,resultsPlate)'''
+            cv2.waitKey(2000)
             cv2.destroyAllWindows()
             
     # This is for videos
