@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Class definition of YOLO_v3 style detection model on image and video
-"""
+
 import time
 import colorsys
 import os
@@ -21,7 +19,7 @@ from .yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
 from .yolo3.utils import letterbox_image
 import argparse
 import sys
-import pyrebase
+# import pyrebase
 from keras.utils import multi_gpu_model
 import re
 pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
@@ -37,15 +35,15 @@ config = {
   "storageBucket": "gs://vechiledetection.appspot.com",
   "serviceAccount": "D:/LicensePlateWithYOLO/db/vechiledetection-firebase-adminsdk-kiblg-ddb38b4b7f.json"
 }
-firebase = pyrebase.initialize_app(config)
+# firebase = pyrebase.initialize_app(config)
 
-db = firebase.database()
+# db = firebase.database()
 
 currentDTKey = datetime.datetime.now() #For retreiving the key from The system date
 
 DTKey = currentDTKey.strftime("%d%m%Y")
 
-db.child("Entry").set(DTKey)
+'''db.child("Entry").set(DTKey)
 login_data={"r1[]":"PB22G",
             "r2":"4565",
             "auth":"Y29tLmRlbHVzaW9uYWwudmVoaWNsZWluZm8="}
@@ -68,10 +66,10 @@ def RTO(country,plate_no,text):
     vehicleName = data.get('vehicle_name')
     vehicleRegion = data.get('regn_auth')
     vehicleClass = data.get('vh_class')
-    '''try:
+    try:
         print('Vehicle ' + str(i+1) + ': \n' + vehicleOwner + '\n' + vehicleName + '\n' + vehicleClass + '\n' + vehicleRegion + '\n' + resultsPlate)
     except:
-        print("Data not found")'''
+        print("Data not found")
 #Start-of-Firebase-Operations
      #for retrieving the time from the system 
     vehicleTime = currentDT.strftime("%H%M%S")
@@ -83,7 +81,7 @@ def RTO(country,plate_no,text):
             "vclass": str(vehicleClass)
              }
     
-    db.child("Entry").child(DTKey).child(vehicleTime).set(data)
+    db.child("Entry").child(DTKey).child(vehicleTime).set(data)'''
 def get_parent_dir(n=1):
     """ returns the n-th parent dicrectory of the current
         working directory """
@@ -111,10 +109,10 @@ detection_results_file = os.path.join(detection_results_folder, "Detection_Resul
 
 model_folder = os.path.join(data_folder, "Model_Weights")
 
-model_weights = 'D:/LicensePlateWithYOLO/Data/Model_Weights/trained_weights_final.h5'
-model_classes = 'D:/LicensePlateWithYOLO/Data/Model_Weights/data_classes.txt'
+model_weights = 'C:/Users/Tushar Goel/Desktop/LicensePlateWithYOLO/Data/Model_Weights/trained_weights_final.h5'
+model_classes = 'C:/Users/Tushar Goel/Desktop/LicensePlateWithYOLO/Data/Model_Weights/data_classes.txt'
 
-anchors_path = 'D:\\LicensePlateWithYOLO\\2_Training\\src\\keras_yolo3\\model_data\\yolo_anchors.txt'
+anchors_path = 'C:\\Users\\Tushar Goel\\Desktop\\LicensePlateWithYOLO\\2_Training\\src\\keras_yolo3\\model_data\\yolo_anchors.txt'
 parser = argparse.ArgumentParser(argument_default=argparse.SUPPRESS)
 
 
@@ -206,7 +204,16 @@ FLAGS = parser.parse_args()
 save_img = not FLAGS.no_save_img
 
 file_types = FLAGS.file_types
-
+yolo_plate = YOLO_Plate(
+        **{
+            "model_path": FLAGS.model_path,
+            "anchors_path": FLAGS.anchors_path,
+            "classes_path": FLAGS.classes_path,
+            "score": FLAGS.score,
+            "gpu_num": FLAGS.gpu_num,
+            "model_image_size": (416, 416),
+        }
+    )
 
 class YOLO(object):
     _defaults = {
@@ -361,6 +368,7 @@ class YOLO(object):
             font=font_path, size=np.floor(3e-2 * image.size[1] + 0.5).astype("int32")
         )
         thickness = (image.size[0] + image.size[1]) // 300
+        x,image = detect_image_Plate(yolo_plate,image,show_stats=False)
         
         for i, c in reversed(list(enumerate(out_classes))):
             
@@ -419,22 +427,14 @@ class YOLO(object):
         end = timer()
         if show_stats:
             print("Time spent: {:.3f}sec".format(end - start))
-        return out_prediction, image
+        return out_prediction,x, image
+    
     
 
     def close_session(self):
         self.sess.close()
         
-yolo_plate = YOLO_Plate(
-        **{
-            "model_path": FLAGS.model_path,
-            "anchors_path": FLAGS.anchors_path,
-            "classes_path": FLAGS.classes_path,
-            "score": FLAGS.score,
-            "gpu_num": FLAGS.gpu_num,
-            "model_image_size": (416, 416),
-        }
-    )
+
 
 def plate_no_recognizer(text):
   
@@ -499,7 +499,7 @@ def detect_video(yolo, video_path, output_path=""):
         # opencv images are BGR, translate to RGB
         frame = frame[:, :, ::-1]
         image = Image.fromarray(frame)
-        out_pred, image = yolo.detect_image(image, show_stats=False)
+        out_pred,car_plate, image = yolo.detect_image(image, show_stats=False)
         x,image = detect_image_Plate(yolo_plate,image,show_stats=False)
         image = np.asarray(image)
         if len(out_pred)!=0: 
@@ -527,9 +527,9 @@ def detect_video(yolo, video_path, output_path=""):
                                 if score_plate>0.8:
                                     roi = frame[top_plate:bottom_plate,left_plate:right_plate]
                                     cv2.imwrite('D:/objects/savedPlate.png'.format(j),roi)
-                                    test = cv2.imread('D:/objects/savedPlate.png')
+                                    img = cv2.imread('D:/objects/savedPlate.png')
                                     
-                                    img = cv2.resize(test, (333, 75))
+                                    
                                     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                                     # cv2.imshow("grayim",img_gray)
                                     _, img_binary = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
